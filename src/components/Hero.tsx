@@ -47,7 +47,7 @@ export function Hero() {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#contato"
+            href="#autoridade"
             className="rounded-full bg-gold px-10 py-4 text-[14px] font-bold uppercase tracking-[0.12em] text-emerald-deep transition-colors duration-300 hover:bg-gold-bright"
           >
             Quero minha análise gratuita

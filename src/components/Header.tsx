@@ -8,7 +8,7 @@ const LINKS: NavLink[] = [
   { label: "Autoridade", href: "#autoridade" },
   { label: "Serviços", href: "#servicos" },
   { label: "Método", href: "#metodo" },
-  { label: "Contato", href: "#contato" },
+  { label: "Contato", href: "#autoridade" },
 ];
 
 function Brand({ onClick }: { onClick?: () => void }) {
@@ -54,7 +54,7 @@ export function Header() {
             ))}
           </nav>
           <a
-            href="#contato"
+            href="#autoridade"
             className="hidden rounded-full bg-gold px-6 py-3 text-[12px] font-bold uppercase tracking-[0.12em] text-emerald-deep transition-colors hover:bg-gold-bright md:inline-block"
           >
             Falar com especialista
@@ -94,7 +94,7 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contato"
+              href="#autoridade"
               onClick={() => setOpen(false)}
               className="mt-6 w-fit rounded-full bg-gold px-7 py-4 text-[13px] font-bold uppercase tracking-[0.12em] text-emerald-deep"
             >

@@ -4,7 +4,7 @@ const LINKS: NavLink[] = [
   { label: "Autoridade", href: "#autoridade" },
   { label: "Serviços", href: "#servicos" },
   { label: "Método", href: "#metodo" },
-  { label: "Contato", href: "#contato" },
+  { label: "Contato", href: "#autoridade" },
 ];
 
 export function Footer() {
@@ -64,7 +64,7 @@ export function Footer() {
               gratuita.
             </p>
             <a
-              href="#contato"
+              href="#autoridade"
               className="mt-5 inline-block rounded-full bg-gold px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.12em] text-emerald-deep transition-colors hover:bg-gold-bright"
             >
               Quero minha análise
