@@ -2,8 +2,9 @@ import { Reveal } from "@/components/Reveal";
 import { LeadForm } from "@/components/LeadForm";
 
 const STATS = [
-  { value: "+1.000", label: "seguidores engajados" },
-  { value: "58", label: "conteúdos publicados" },
+  { value: "+200", label: "negócios alavancados" },
+  { value: "+45%", label: "de faturamento médio" },
+  { value: "+5 anos", label: "de mercado" },
 ];
 
 export function Authority() {
