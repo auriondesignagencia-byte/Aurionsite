@@ -7,13 +7,16 @@ export const runtime = "nodejs";
 
 const LEADS_FILE = path.join(process.cwd(), "data", "leads.json");
 
-interface Lead {
-  nome: string;
-  whatsapp: string;
-  instagram?: string;
-  segmento?: string;
-  recebidoEm: string;
-}
+const FIELDS = [
+  "nome",
+  "whatsapp",
+  "email",
+  "empresa",
+  "faturamento",
+  "socialMedia",
+  "instagram",
+  "segmento",
+] as const;
 
 export async function POST(request: Request) {
   try {
@@ -28,16 +31,14 @@ export async function POST(request: Request) {
       );
     }
 
-    const lead: Lead = {
-      nome,
-      whatsapp,
-      instagram: String(body?.instagram ?? "").trim(),
-      segmento: String(body?.segmento ?? "").trim(),
-      recebidoEm: new Date().toISOString(),
-    };
+    const lead: Record<string, string> = { recebidoEm: new Date().toISOString() };
+    for (const f of FIELDS) {
+      const v = String(body?.[f] ?? "").trim();
+      if (v) lead[f] = v;
+    }
 
     // Append to data/leads.json (swap this block for your CRM/webhook later).
-    let leads: Lead[] = [];
+    let leads: unknown[] = [];
     try {
       leads = JSON.parse(await fs.readFile(LEADS_FILE, "utf8"));
     } catch {

@@ -2,16 +2,19 @@
 
 import { useState, type FormEvent } from "react";
 
-const SEGMENTOS = [
-  "Selecione seu segmento",
-  "Estética & Beleza",
-  "Saúde & Bem-estar",
-  "Moda & Lifestyle",
-  "Alimentação & Gastronomia",
-  "Imóveis & Arquitetura",
-  "Serviços & Consultoria",
-  "Infoproduto & Educação",
-  "Outro",
+const FATURAMENTO = [
+  "Faturamento mensal",
+  "Até R$ 10 mil",
+  "R$ 10 mil a R$ 50 mil",
+  "R$ 50 mil a R$ 100 mil",
+  "Acima de R$ 100 mil",
+];
+
+const SOCIAL = [
+  "Já investe em social media?",
+  "Ainda não invisto",
+  "Faço por conta própria",
+  "Já tenho agência/freelancer",
 ];
 
 type Status = "idle" | "loading" | "ok" | "error";
@@ -52,39 +55,33 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
         </div>
         <h3 className="text-[20px] font-bold text-cream">Recebemos o seu contato!</h3>
         <p className="mt-2 text-[15px] font-light text-cream/70">
-          Nossa equipe vai te chamar em breve com a sua análise estratégica
-          gratuita. Fique de olho no seu WhatsApp.
+          Em até 5 minutos a nossa equipe vai te chamar no WhatsApp. Fique de olho!
         </p>
       </div>
     );
   }
 
+  const inputCls =
+    "w-full rounded-xl border border-cream/15 bg-black/30 px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/40 outline-none transition-colors focus:border-gold";
+  const selectCls =
+    "w-full rounded-xl border border-cream/15 bg-black/30 px-4 py-3.5 text-[15px] text-cream/70 outline-none transition-colors focus:border-gold";
+
   return (
-    <form id={id} onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <input
-        name="nome"
-        required
-        placeholder="Seu nome"
-        className="w-full rounded-xl border border-cream/15 bg-black/30 px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/40 outline-none transition-colors focus:border-gold"
-      />
-      <input
-        name="whatsapp"
-        required
-        inputMode="tel"
-        placeholder="Seu WhatsApp (com DDD)"
-        className="w-full rounded-xl border border-cream/15 bg-black/30 px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/40 outline-none transition-colors focus:border-gold"
-      />
-      <input
-        name="instagram"
-        placeholder="@ do seu Instagram"
-        className="w-full rounded-xl border border-cream/15 bg-black/30 px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/40 outline-none transition-colors focus:border-gold"
-      />
-      <select
-        name="segmento"
-        defaultValue=""
-        className="w-full rounded-xl border border-cream/15 bg-black/30 px-4 py-3.5 text-[15px] text-cream/70 outline-none transition-colors focus:border-gold"
-      >
-        {SEGMENTOS.map((s, i) => (
+    <form id={id} onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
+      <input name="nome" required placeholder="Qual seu nome?" className={inputCls} />
+      <input name="whatsapp" required inputMode="tel" placeholder="WhatsApp com DDD" className={inputCls} />
+      <input name="email" type="email" placeholder="Seu melhor e-mail" className={inputCls} />
+      <input name="empresa" placeholder="Nome da empresa" className={inputCls} />
+
+      <select name="faturamento" defaultValue="" className={selectCls}>
+        {FATURAMENTO.map((f, i) => (
+          <option key={f} value={i === 0 ? "" : f} disabled={i === 0} className="bg-emerald-deep text-cream">
+            {f}
+          </option>
+        ))}
+      </select>
+      <select name="socialMedia" defaultValue="" className={selectCls}>
+        {SOCIAL.map((s, i) => (
           <option key={s} value={i === 0 ? "" : s} disabled={i === 0} className="bg-emerald-deep text-cream">
             {s}
           </option>
@@ -94,15 +91,15 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="mt-1 rounded-full bg-gold px-7 py-4 text-[14px] font-bold uppercase tracking-[0.12em] text-emerald-deep transition-all duration-300 hover:bg-gold-bright disabled:opacity-60"
+        className="mt-1 rounded-full bg-gold px-7 py-4 text-[14px] font-bold uppercase tracking-[0.12em] text-emerald-deep transition-all duration-300 hover:bg-gold-bright disabled:opacity-60 sm:col-span-2"
       >
-        {status === "loading" ? "Enviando..." : "Quero minha análise gratuita"}
+        {status === "loading" ? "Enviando..." : "Enviar"}
       </button>
 
       {status === "error" && (
-        <p className="text-center text-[13px] text-red-300">{error}</p>
+        <p className="text-center text-[13px] text-red-300 sm:col-span-2">{error}</p>
       )}
-      <p className="text-center text-[12px] font-light text-cream/40">
+      <p className="text-center text-[12px] font-light text-cream/40 sm:col-span-2">
         Sem compromisso. Respeitamos os seus dados.
       </p>
     </form>
