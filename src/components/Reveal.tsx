@@ -1,42 +1,23 @@
-"use client";
-
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface RevealProps {
   children: ReactNode;
   className?: string;
-  /** delay in ms before the animation starts once visible */
+  /** stagger delay in ms */
   delay?: number;
   as?: "div" | "section" | "li" | "article";
 }
 
-/** Wraps content and plays a fade-up animation when it scrolls into view. */
-export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const Tag = as;
+/**
+ * Subtle fade-up entrance. Implemented as a pure-CSS animation with
+ * `both` fill-mode so content always ends visible (degrades gracefully
+ * without JS and respects prefers-reduced-motion).
+ */
+export function Reveal({ children, className, delay = 0, as: Tag = "div" }: RevealProps) {
   return (
     <Tag
-      ref={ref as React.Ref<never>}
-      className={cn("agd-reveal", visible && "is-visible", className)}
+      className={cn("agd-reveal", className)}
       style={delay ? { animationDelay: `${delay}ms` } : undefined}
     >
       {children}
