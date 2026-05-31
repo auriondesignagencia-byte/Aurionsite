@@ -14,21 +14,19 @@ const qwigley = Qwigley({
 });
 
 export const metadata: Metadata = {
-  title: "Agência de Marketing | Sofisticação e Resultados",
+  metadataBase: new URL("https://auriondesign.com.br"),
+  title: "Aurion Design | Agência de Social Media Estratégica",
   description:
-    "Agência de Marketing de padrão internacional, com soluções completas para transformar sua marca em objeto de desejo e aumentar suas vendas",
+    "Marcas que comandam a percepção vendem mais. A Aurion Design transforma seu posicionamento digital em autoridade, desejo e vendas com social media estratégico.",
   icons: {
-    icon: [
-      { url: "/assets/2023/08/cropped-AGD-SIMBOLO-V2-favicon-branco-32x32.png", sizes: "32x32" },
-      { url: "/assets/2023/08/cropped-AGD-SIMBOLO-V2-favicon-branco-192x192.png", sizes: "192x192" },
-    ],
-    apple: "/assets/2023/08/cropped-AGD-SIMBOLO-V2-favicon-branco-180x180.png",
+    icon: "/assets/brand/aurion-mark.jpeg",
+    apple: "/assets/brand/aurion-mark.jpeg",
   },
   openGraph: {
-    title: "Agência de Marketing | Sofisticação e Resultados",
+    title: "Aurion Design | Agência de Social Media Estratégica",
     description:
-      "Agência de Marketing de padrão internacional, com soluções completas para transformar sua marca em objeto de desejo e aumentar suas vendas",
-    images: ["/assets/2022/03/agd-hero-v4.jpg"],
+      "Posicionamento & estratégia digital para marcas que querem comandar a percepção e vender mais.",
+    images: ["/assets/brand/aurion-ig.jpeg"],
     type: "website",
   },
 };

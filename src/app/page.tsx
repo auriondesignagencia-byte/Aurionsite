@@ -1,10 +1,10 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { ClientLogos } from "@/components/ClientLogos";
-import { PerformanceIntro } from "@/components/PerformanceIntro";
+import { Authority } from "@/components/Authority";
+import { Pains } from "@/components/Pains";
 import { Services } from "@/components/Services";
-import { ValueProp } from "@/components/ValueProp";
-import { Portfolio } from "@/components/Portfolio";
+import { Method } from "@/components/Method";
+import { FinalCta } from "@/components/FinalCta";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -13,11 +13,11 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <ClientLogos />
-        <PerformanceIntro />
+        <Authority />
+        <Pains />
         <Services />
-        <ValueProp />
-        <Portfolio />
+        <Method />
+        <FinalCta />
       </main>
       <Footer />
     </>

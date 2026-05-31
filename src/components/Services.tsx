@@ -3,74 +3,73 @@ import type { Service } from "@/types/content";
 
 const SERVICES: Service[] = [
   {
-    title: "Consultoria de Marketing, Vendas e BI",
+    title: "Posicionamento & Estratégia",
     description:
-      "Consultoria especializada em Marketing, Vendas e Business Intelligence, para aumentar as vendas do seu negócio de forma exponencial, usando as tecnologias mais avançadas do mercado.",
+      "Definimos a percepção que sua marca precisa comandar e construímos o plano de conteúdo que transforma seguidores em clientes.",
   },
   {
-    title: "Gestão de Redes Sociais e Plataformas",
+    title: "Gestão de Redes Sociais",
     description:
-      "Operação de Marketing, com gerenciamento de redes sociais e de outras plataformas digitais; produção de conteúdo direcionado para performance de vendas usando o digital.",
+      "Operação completa do seu perfil: planejamento, calendário, publicação e relacionamento, com consistência profissional todos os dias.",
   },
   {
-    title: "Identidade e Visuais de Marca",
+    title: "Conteúdo Estratégico",
     description:
-      "Estratégia, identidade visual para empresas e campanhas, criação de logo, desenvolvimento de layouts e serviços gerais de Branding, para comunicar eficazmente a sua marca.",
+      "Roteiros, copys e pautas pensados para autoridade e venda — conteúdo que para o scroll e gera desejo, não só curtidas.",
   },
   {
-    title: "Design de Sites e Interfaces",
+    title: "Identidade Visual & Branding",
     description:
-      "Sites e e-commerce 100% customizados, UI Design & front-end para aplicativos.",
+      "Um feed coeso e sofisticado que comunica o real valor da sua marca e te posiciona no padrão dos melhores do seu mercado.",
   },
   {
-    title: "Design de Impressos e Packaging",
+    title: "Tráfego Pago",
     description:
-      "Projetos gráficos para embalagens, impressos e materiais personalizados on e offline.",
+      "Anúncios estratégicos para alcançar as pessoas certas, atrair leads qualificados e acelerar as vendas com previsibilidade.",
   },
   {
-    title: "Tráfego Pago de Alta Performance",
+    title: "Audiovisual & Produção",
     description:
-      "Gestão de Ads, estratégia e criação de campanhas publicitárias para mídias on e offline. Direção de arte e captação de conteúdo audiovisual para anúncios nas principais plataformas online.",
-  },
-  {
-    title: "Design de Colaterais de marca",
-    description:
-      "Projetos gráficos para iscas digitais, ebooks, checklists e outros materiais de marca, para uso em campanhas de inbound.",
-  },
-  {
-    title: "Design de Apresentações e Visual Aids",
-    description:
-      "Design de Visual Aids, templates para apresentações e relatórios. Elaboração de Key Visuals para comunicação interna e comercial.",
-  },
-  {
-    title: "Fotos e Vídeos Cinematográficos",
-    description:
-      "Captação de fotos e vídeos profissionais para conteúdos de redes sociais, anúncios, campanhas publicitárias e construção de identidade de marca.",
+      "Direção de fotos e vídeos com estética de alto padrão para campanhas, reels e conteúdos que valorizam a sua marca.",
   },
 ];
 
 export function Services() {
   return (
-    <section id="o-que-fazemos" className="bg-black py-20 md:py-28">
+    <section id="servicos" className="bg-emerald-deep py-20 md:py-28">
       <div className="mx-auto max-w-[1100px] px-6">
-        <Reveal className="mx-auto max-w-[840px] text-center">
-          <h2 className="text-[28px] font-bold leading-[1.15] text-white md:text-[36px]">
-            O que as pessoas pensam sobre você{" "}
-            <b className="font-bold">impacta os seus resultados</b>
+        <Reveal className="mx-auto max-w-[760px] text-center">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+            O que fazemos
+          </span>
+          <h2 className="mt-4 text-[28px] font-bold leading-[1.12] tracking-[-0.5px] text-cream md:text-[40px]">
+            Social media de ponta a ponta, com{" "}
+            <span className="font-script text-[40px] font-normal tracking-normal text-gold md:text-[54px]">
+              estratégia
+            </span>{" "}
+            em cada detalhe
           </h2>
-          <p className="mx-auto mt-6 max-w-[640px] text-[18px] font-light leading-[28px] text-white/70 md:text-[20px]">
-            Descubra a Agência de Marketing que vai transformar a percepção do
-            mercado sobre a sua empresa
+          <p className="mx-auto mt-5 max-w-[600px] text-[16px] font-light leading-[26px] text-cream/70 md:text-[18px]">
+            Da estratégia à execução, cuidamos de tudo para a sua marca crescer
+            com consistência e autoridade.
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-x-10 gap-y-12 text-left sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.title} as="article" delay={(i % 3) * 90}>
-              <h3 className="text-[19px] font-bold leading-[1.3] text-white">
+            <Reveal
+              key={s.title}
+              as="article"
+              delay={(i % 3) * 80}
+              className="group rounded-2xl border border-cream/10 bg-bg/40 p-7 transition-colors hover:border-gold/50"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/12 text-[16px] font-bold text-gold">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-5 text-[19px] font-bold leading-[1.3] text-cream">
                 {s.title}
               </h3>
-              <p className="mt-3 text-[15px] font-light leading-[25px] text-white/60">
+              <p className="mt-3 text-[15px] font-light leading-[25px] text-cream/65">
                 {s.description}
               </p>
             </Reveal>
