@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LeadPixelEvent } from "./LeadPixelEvent";
 
 export const metadata: Metadata = {
   title: "Obrigado | Aurion Design",
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function ObrigadoPage() {
   return (
     <main className="flex min-h-dvh items-center justify-center bg-bg px-6 text-center">
+      <LeadPixelEvent />
       <div className="max-w-md">
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gold text-emerald-deep">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Qwigley } from "next/font/google";
 import "./globals.css";
+import { MetaPixel } from "@/components/MetaPixel";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${openSans.variable} ${qwigley.variable} antialiased`}>
+        <MetaPixel />
         {children}
       </body>
     </html>
