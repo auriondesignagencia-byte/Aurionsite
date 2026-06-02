@@ -17,17 +17,20 @@ const FIELDS = {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const nome = String(body?.nome ?? "").trim();
-    const whatsapp = String(body?.whatsapp ?? "").trim();
 
-    if (!nome || !whatsapp) {
+    // Todos esses campos são obrigatórios (espelha o formulário).
+    const REQUIRED = ["nome", "whatsapp", "email", "instagram", "faturamento", "socialMedia"] as const;
+    const values: Record<string, string> = {};
+    for (const f of REQUIRED) values[f] = String(body?.[f] ?? "").trim();
+
+    if (REQUIRED.some((f) => !values[f])) {
       return NextResponse.json(
-        { ok: false, error: "Nome e WhatsApp são obrigatórios." },
+        { ok: false, error: "Preencha todos os campos obrigatórios." },
         { status: 400 },
       );
     }
 
-    const lead: Record<string, string> = { nome, whatsapp };
+    const lead: Record<string, string> = { nome: values.nome, whatsapp: values.whatsapp };
     for (const [field, column] of Object.entries(FIELDS)) {
       const v = String(body?.[field] ?? "").trim();
       if (v) lead[column] = v;

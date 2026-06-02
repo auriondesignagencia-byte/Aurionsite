@@ -57,17 +57,17 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
     <form id={id} onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
       <input name="nome" required placeholder="Qual seu nome?" className={inputCls} />
       <input name="whatsapp" required inputMode="tel" placeholder="WhatsApp com DDD" className={inputCls} />
-      <input name="email" type="email" placeholder="Seu melhor e-mail" className={inputCls} />
-      <input name="instagram" placeholder="Seu Instagram" className={inputCls} />
+      <input name="email" type="email" required placeholder="Seu melhor e-mail" className={inputCls} />
+      <input name="instagram" required placeholder="Seu Instagram" className={inputCls} />
 
-      <select name="faturamento" defaultValue="" className={selectCls}>
+      <select name="faturamento" required defaultValue="" className={selectCls}>
         {FATURAMENTO.map((f, i) => (
           <option key={f} value={i === 0 ? "" : f} disabled={i === 0} className="bg-emerald-deep text-cream">
             {f}
           </option>
         ))}
       </select>
-      <select name="socialMedia" defaultValue="" className={selectCls}>
+      <select name="socialMedia" required defaultValue="" className={selectCls}>
         {SOCIAL.map((s, i) => (
           <option key={s} value={i === 0 ? "" : s} disabled={i === 0} className="bg-emerald-deep text-cream">
             {s}
