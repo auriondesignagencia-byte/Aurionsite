@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 const FATURAMENTO = [
   "Faturamento mensal",
@@ -22,6 +23,7 @@ type Status = "idle" | "loading" | "ok" | "error";
 export function LeadForm({ id = "lead-form" }: { id?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,27 +40,12 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
       const json = await res.json();
       if (!res.ok || !json.ok) throw new Error(json.error || "Erro ao enviar.");
       form.reset();
-      setStatus("ok");
+      // Redireciona para a página de obrigado.
+      router.push("/obrigado");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro ao enviar.");
       setStatus("error");
     }
-  }
-
-  if (status === "ok") {
-    return (
-      <div className="rounded-2xl border border-gold/40 bg-emerald/40 p-8 text-center">
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gold text-emerald-deep">
-          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-            <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <h3 className="text-[20px] font-bold text-cream">Recebemos o seu contato!</h3>
-        <p className="mt-2 text-[15px] font-light text-cream/70">
-          Em até 5 minutos a nossa equipe vai te chamar no WhatsApp. Fique de olho!
-        </p>
-      </div>
-    );
   }
 
   const inputCls =
@@ -71,7 +58,7 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
       <input name="nome" required placeholder="Qual seu nome?" className={inputCls} />
       <input name="whatsapp" required inputMode="tel" placeholder="WhatsApp com DDD" className={inputCls} />
       <input name="email" type="email" placeholder="Seu melhor e-mail" className={inputCls} />
-      <input name="empresa" placeholder="Nome da empresa" className={inputCls} />
+      <input name="instagram" placeholder="Seu Instagram" className={inputCls} />
 
       <select name="faturamento" defaultValue="" className={selectCls}>
         {FATURAMENTO.map((f, i) => (

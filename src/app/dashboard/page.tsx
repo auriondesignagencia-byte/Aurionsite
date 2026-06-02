@@ -102,7 +102,7 @@ export default async function DashboardPage() {
                   <th className="px-4 py-3 font-semibold">Data</th>
                   <th className="px-4 py-3 font-semibold">Nome</th>
                   <th className="px-4 py-3 font-semibold">WhatsApp</th>
-                  <th className="px-4 py-3 font-semibold">Empresa</th>
+                  <th className="px-4 py-3 font-semibold">Instagram</th>
                   <th className="px-4 py-3 font-semibold">Faturamento</th>
                   <th className="px-4 py-3 font-semibold">Social</th>
                   <th className="px-4 py-3 font-semibold">Status</th>
@@ -125,7 +125,7 @@ export default async function DashboardPage() {
                         {l.whatsapp}
                       </a>
                     </td>
-                    <td className="px-4 py-3 text-cream/70">{l.empresa ?? "—"}</td>
+                    <td className="px-4 py-3 text-cream/70">{l.instagram ?? "—"}</td>
                     <td className="px-4 py-3 text-cream/70">{l.faturamento ?? "—"}</td>
                     <td className="px-4 py-3 text-cream/70">{l.social_media ?? "—"}</td>
                     <td className="px-4 py-3">
