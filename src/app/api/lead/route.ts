@@ -1,22 +1,18 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "node:fs";
-import path from "node:path";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { notifyNewLead } from "@/lib/zapi";
 
-// Runs on the Node runtime so we can persist leads to disk.
 export const runtime = "nodejs";
 
-const LEADS_FILE = path.join(process.cwd(), "data", "leads.json");
-
-const FIELDS = [
-  "nome",
-  "whatsapp",
-  "email",
-  "empresa",
-  "faturamento",
-  "socialMedia",
-  "instagram",
-  "segmento",
-] as const;
+// Campos do form -> colunas da tabela leads.
+const FIELDS = {
+  email: "email",
+  empresa: "empresa",
+  faturamento: "faturamento",
+  socialMedia: "social_media",
+  instagram: "instagram",
+  segmento: "segmento",
+} as const;
 
 export async function POST(request: Request) {
   try {
@@ -31,22 +27,33 @@ export async function POST(request: Request) {
       );
     }
 
-    const lead: Record<string, string> = { recebidoEm: new Date().toISOString() };
-    for (const f of FIELDS) {
-      const v = String(body?.[f] ?? "").trim();
-      if (v) lead[f] = v;
+    const lead: Record<string, string> = { nome, whatsapp };
+    for (const [field, column] of Object.entries(FIELDS)) {
+      const v = String(body?.[field] ?? "").trim();
+      if (v) lead[column] = v;
     }
 
-    // Append to data/leads.json (swap this block for your CRM/webhook later).
-    let leads: unknown[] = [];
-    try {
-      leads = JSON.parse(await fs.readFile(LEADS_FILE, "utf8"));
-    } catch {
-      leads = [];
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("leads")
+      .insert(lead)
+      .select()
+      .single();
+
+    if (error) {
+      console.error("[lead] erro ao gravar no Supabase", error);
+      return NextResponse.json(
+        { ok: false, error: "Não foi possível registrar agora. Tente novamente." },
+        { status: 500 },
+      );
     }
-    leads.push(lead);
-    await fs.mkdir(path.dirname(LEADS_FILE), { recursive: true });
-    await fs.writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), "utf8");
+
+    // Dispara no grupo do comercial. Não bloqueia a resposta de sucesso:
+    // se a Z-API falhar, o lead já está salvo e marcamos notified=false.
+    const notify = await notifyNewLead(data);
+    if (notify.ok) {
+      await supabase.from("leads").update({ notified: true }).eq("id", data.id);
+    }
 
     return NextResponse.json({ ok: true });
   } catch {

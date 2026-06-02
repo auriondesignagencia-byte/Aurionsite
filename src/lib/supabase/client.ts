@@ -1,0 +1,9 @@
+import { createBrowserClient } from "@supabase/ssr";
+
+// Browser client — usado em Client Components (ex.: formulário de login).
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
+}
