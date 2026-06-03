@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 
 const FATURAMENTO = [
   "Faturamento mensal",
-  "Até R$ 10 mil",
-  "R$ 10 mil a R$ 50 mil",
+  "Abaixo de R$ 5 mil",
+  "R$ 5 mil a R$ 10 mil",
+  "R$ 10 mil a R$ 25 mil",
+  "R$ 25 mil a R$ 50 mil",
   "R$ 50 mil a R$ 100 mil",
   "Acima de R$ 100 mil",
 ];
