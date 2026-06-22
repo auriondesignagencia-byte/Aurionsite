@@ -3,21 +3,33 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-const FATURAMENTO = [
-  "Faturamento mensal",
-  "Abaixo de R$ 5 mil",
-  "R$ 5 mil a R$ 10 mil",
-  "R$ 10 mil a R$ 25 mil",
-  "R$ 25 mil a R$ 50 mil",
-  "R$ 50 mil a R$ 100 mil",
-  "Acima de R$ 100 mil",
-];
-
 const SOCIAL = [
   "Já investe em social media?",
   "Ainda não invisto",
   "Faço por conta própria",
   "Já tenho agência/freelancer",
+];
+
+const INVESTIMENTO = [
+  {
+    value: "R$ 597 — Social Media",
+    preco: "R$ 597",
+    titulo: "Social Media",
+    desc: "Ideal para quem quer apenas começar a ter presença.",
+  },
+  {
+    value: "R$ 797 — Social Media + Site",
+    preco: "R$ 797",
+    titulo: "Social Media + Site",
+    desc: 'O seu "carro-chefe" para quem busca crescimento real.',
+    destaque: true,
+  },
+  {
+    value: "Acima de R$ 1.397 — Social Media + Tráfego Pago",
+    preco: "Acima de R$ 1.397",
+    titulo: "Social Media + Tráfego Pago",
+    desc: "Para empresas que buscam gestão completa + estratégia personalizada.",
+  },
 ];
 
 type Status = "idle" | "loading" | "ok" | "error";
@@ -59,16 +71,8 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
     <form id={id} onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
       <input name="nome" required placeholder="Qual seu nome?" className={inputCls} />
       <input name="whatsapp" required inputMode="tel" placeholder="WhatsApp com DDD" className={inputCls} />
-      <input name="email" type="email" required placeholder="Seu melhor e-mail" className={inputCls} />
       <input name="instagram" required placeholder="Seu Instagram" className={inputCls} />
 
-      <select name="faturamento" required defaultValue="" className={selectCls}>
-        {FATURAMENTO.map((f, i) => (
-          <option key={f} value={i === 0 ? "" : f} disabled={i === 0} className="bg-emerald-deep text-cream">
-            {f}
-          </option>
-        ))}
-      </select>
       <select name="socialMedia" required defaultValue="" className={selectCls}>
         {SOCIAL.map((s, i) => (
           <option key={s} value={i === 0 ? "" : s} disabled={i === 0} className="bg-emerald-deep text-cream">
@@ -76,6 +80,33 @@ export function LeadForm({ id = "lead-form" }: { id?: string }) {
           </option>
         ))}
       </select>
+
+      <fieldset className="mt-1 sm:col-span-2">
+        <legend className="mb-3 text-[14px] font-light text-cream/80">
+          Qual dessas faixas de investimento melhor se adequa ao momento atual da sua empresa?
+        </legend>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {INVESTIMENTO.map((opt) => (
+            <label
+              key={opt.value}
+              className="group relative flex cursor-pointer flex-col rounded-xl border border-cream/15 bg-black/30 p-4 transition-colors hover:border-gold/50 has-[:checked]:border-gold has-[:checked]:bg-gold/10"
+            >
+              <input type="radio" name="investimento" value={opt.value} required className="peer sr-only" />
+              {opt.destaque && (
+                <span className="absolute -top-2 right-3 rounded-full bg-gold px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-emerald-deep">
+                  Recomendado
+                </span>
+              )}
+              <span className="text-[17px] font-bold text-gold">{opt.preco}</span>
+              <span className="mt-0.5 text-[13px] font-semibold text-cream">{opt.titulo}</span>
+              <span className="mt-1.5 text-[12px] font-light leading-snug text-cream/55">{opt.desc}</span>
+              <span className="mt-3 flex h-4 w-4 items-center justify-center rounded-full border border-cream/30 transition-colors peer-checked:border-gold">
+                <span className="h-2 w-2 rounded-full bg-gold opacity-0 transition-opacity peer-checked:opacity-100" />
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <button
         type="submit"

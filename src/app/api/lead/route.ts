@@ -6,9 +6,8 @@ export const runtime = "nodejs";
 
 // Campos do form -> colunas da tabela leads.
 const FIELDS = {
-  email: "email",
   empresa: "empresa",
-  faturamento: "faturamento",
+  investimento: "investimento",
   socialMedia: "social_media",
   instagram: "instagram",
   segmento: "segmento",
@@ -19,7 +18,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Todos esses campos são obrigatórios (espelha o formulário).
-    const REQUIRED = ["nome", "whatsapp", "email", "instagram", "faturamento", "socialMedia"] as const;
+    const REQUIRED = ["nome", "whatsapp", "instagram", "socialMedia", "investimento"] as const;
     const values: Record<string, string> = {};
     for (const f of REQUIRED) values[f] = String(body?.[f] ?? "").trim();
 

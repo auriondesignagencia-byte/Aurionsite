@@ -9,9 +9,8 @@ type Lead = {
   created_at: string;
   nome: string;
   whatsapp: string;
-  email: string | null;
   empresa: string | null;
-  faturamento: string | null;
+  investimento: string | null;
   social_media: string | null;
   instagram: string | null;
   segmento: string | null;
@@ -103,7 +102,7 @@ export default async function DashboardPage() {
                   <th className="px-4 py-3 font-semibold">Nome</th>
                   <th className="px-4 py-3 font-semibold">WhatsApp</th>
                   <th className="px-4 py-3 font-semibold">Instagram</th>
-                  <th className="px-4 py-3 font-semibold">Faturamento</th>
+                  <th className="px-4 py-3 font-semibold">Investimento</th>
                   <th className="px-4 py-3 font-semibold">Social</th>
                   <th className="px-4 py-3 font-semibold">Status</th>
                 </tr>
@@ -126,7 +125,7 @@ export default async function DashboardPage() {
                       </a>
                     </td>
                     <td className="px-4 py-3 text-cream/70">{l.instagram ?? "—"}</td>
-                    <td className="px-4 py-3 text-cream/70">{l.faturamento ?? "—"}</td>
+                    <td className="px-4 py-3 text-cream/70">{l.investimento ?? "—"}</td>
                     <td className="px-4 py-3 text-cream/70">{l.social_media ?? "—"}</td>
                     <td className="px-4 py-3">
                       <LeadStatusSelect id={l.id} initial={l.status} />

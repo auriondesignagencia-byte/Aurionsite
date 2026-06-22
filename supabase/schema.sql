@@ -8,12 +8,13 @@ create table if not exists public.leads (
   created_at    timestamptz not null default now(),
   nome          text not null,
   whatsapp      text not null,
-  email         text,
   empresa       text,
-  faturamento   text,
+  investimento  text,
   social_media  text,
   instagram     text,
   segmento      text,
+  email         text,        -- legado (não mais coletado pelo formulário)
+  faturamento   text,        -- legado (substituído por "investimento")
   status        text not null default 'novo'
                   check (status in ('novo','em_contato','qualificado','ganho','perdido')),
   notified      boolean not null default false

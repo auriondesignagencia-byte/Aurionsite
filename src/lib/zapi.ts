@@ -4,9 +4,8 @@
 type Lead = {
   nome: string;
   whatsapp: string;
-  email?: string | null;
   empresa?: string | null;
-  faturamento?: string | null;
+  investimento?: string | null;
   social_media?: string | null;
   instagram?: string | null;
   segmento?: string | null;
@@ -28,11 +27,10 @@ function formatLeadMessage(lead: Lead) {
     `👤 *Nome:* ${lead.nome}`,
     `📱 *WhatsApp:* ${lead.whatsapp}`,
   ];
-  if (lead.email) linhas.push(`✉️ *E-mail:* ${lead.email}`);
   if (lead.empresa) linhas.push(`🏢 *Empresa:* ${lead.empresa}`);
-  if (lead.faturamento) linhas.push(`💰 *Faturamento:* ${lead.faturamento}`);
-  if (lead.social_media) linhas.push(`📲 *Social media:* ${lead.social_media}`);
   if (lead.instagram) linhas.push(`📸 *Instagram:* ${lead.instagram}`);
+  if (lead.investimento) linhas.push(`💰 *Investimento:* ${lead.investimento}`);
+  if (lead.social_media) linhas.push(`📲 *Social media:* ${lead.social_media}`);
   if (lead.segmento) linhas.push(`🎯 *Segmento:* ${lead.segmento}`);
   linhas.push("");
   linhas.push(`💬 *Falar agora:* ${wa}`);
